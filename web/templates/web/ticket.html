@@ -1,0 +1,58 @@
+{% extends 'main.html' %}
+
+{% block content %}
+        <main>
+            {% load static %}
+
+            <section class="ticket-section section-padding">
+                <div class="section-overlay"></div>
+
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-10 mx-auto">
+                            <form class="custom-form ticket-form mb-5 mb-lg-0" action="#" method="post" role="form">
+                                {% csrf_token %}
+                                <h2 class="text-center mb-4">Get started here</h2>
+
+                                <div class="ticket-form-body">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            {{form.ticketFullName}}
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            {{form.ticketEmail}}
+                                        </div>
+                                    </div>
+
+                                    {{form.ticketPhone}}
+
+                                    <h6>Choose Ticket Type</h6>
+
+                                    <div class="row">
+                                        {% for choice in form.ticketType %}
+                                        {% if choice.choice_label != '---------' %}
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="form-check form-control">
+                                                <label class="form-check-label" for="{{choice.id_for_label}}">{{choice.choice_label}}</label>
+                                                {{choice.tag}}
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+
+                                    {{form.ticketRequest}}
+
+                                    <div class="col-lg-4 col-md-10 col-8 mx-auto">
+                                        <button type="submit" class="form-control">Buy Ticket</button>
+                                    </div>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+{% endblock content %}
